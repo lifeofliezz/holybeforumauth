@@ -17,10 +17,6 @@ class LoginPage extends React.Component {
     render() {
         return (
             <div>
-                <div className="alert alert-info">
-                    Username: test<br />
-                    Password: test
-                </div>
                 <h2>Login</h2>
                 <Formik
                     initialValues={{
@@ -66,6 +62,9 @@ class LoginPage extends React.Component {
                             {status &&
                                 <div className={'alert alert-danger'}>{status}</div>
                             }
+                            <div className="form-group">
+                                <link to="/register"> <button className="btn btn-primary">Register</button></link>
+                            </div>
                         </Form>
                     )}
                 />

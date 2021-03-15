@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { userService, authenticationService } from '@/_services';
+import { userService, authenticationService, topicService } from '@/_services';
 
 class HomePage extends React.Component {
     constructor(props) {
@@ -8,27 +8,28 @@ class HomePage extends React.Component {
 
         this.state = {
             currentUser: authenticationService.currentUserValue,
-            users: null
+            users: null,
+            topics: null
         };
     }
 
     componentDidMount() {
-        userService.getAll().then(users => this.setState({ users }));
+        topicService.getAll().then(topics => this.setState({ topics }));
     }
 
     render() {
         const { currentUser, users } = this.state;
         return (
             <div>
-                <h1>Hi {currentUser.firstName}!</h1>
-                <p>You're logged in with React & JWT!!</p>
-                <h3>Users from secure api end point:</h3>
+                <h1>Hi {currentUser.user.username}!</h1>
+                <p>You're logged in</p>
+                <h3>Topics</h3>
                 {users &&
-                    <ul>
-                        {users.map(user =>
-                            <li key={user.id}>{user.firstName} {user.lastName}</li>
-                        )}
-                    </ul>
+                <ul>
+                    {topics.map(topic =>
+                        <li key={topic.id}>{topic.title} {topic.content}</li>
+                    )}
+                </ul>
                 }
             </div>
         );
